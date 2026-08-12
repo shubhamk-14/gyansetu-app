@@ -11,14 +11,14 @@ import StudyPlanner from './components/StudyPlanner';
 import QuestionBank from './components/QuestionBank';
 import Leaderboard from './components/Leaderboard';
 import AuthModal from './components/AuthModal';
+import AppSettingsMenu from './components/AppSettingsMenu';
 import { firebaseSignOut } from './services/firebaseService';
 import { 
   LayoutDashboard, 
   BookOpen, 
   Clock, 
   Bot, 
-  Trophy,
-  UserCheck
+  Settings
 } from 'lucide-react';
 
 export default function App() {
@@ -107,7 +107,7 @@ export default function App() {
     <div className={`min-h-screen flex flex-col transition-colors duration-200 ${
       isDark ? 'bg-[#06080D] text-slate-100' : 'bg-[#F8FAFC] text-slate-950'
     }`}>
-      {/* Top Navbar */}
+      {/* Top Clean Navbar (Logo & Goal Exam Selector ONLY) */}
       <Navbar 
         currentExam={currentExam} 
         setCurrentExam={setCurrentExam}
@@ -118,17 +118,12 @@ export default function App() {
           setActiveTab(tab);
         }}
         theme={theme}
-        setTheme={setTheme}
-        user={user}
-        onOpenAuthModal={() => setAuthModalOpen(true)}
-        onLogout={handleLogout}
-        streakDays={user ? user.streak : 0}
       />
 
       {/* Guest Mode Demo Notice Bar */}
       {!user && (
         <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 font-black text-xs px-4 py-2 text-center flex items-center justify-center gap-3 shadow-md">
-          <span>🎓 Guest Demo View: You are previewing GyanSetu PRO. Sign In or Register to unlock Mock Exams, AI Tutor & Quizzes!</span>
+          <span>🎓 Guest Demo View: Previewing GyanSetu PRO. Sign In in Settings menu to unlock Mock Exams & AI Tutor!</span>
           <button
             onClick={() => setAuthModalOpen(true)}
             className="px-3 py-1 bg-slate-950 text-white rounded-lg font-black text-[11px] hover:bg-slate-800 transition-all shrink-0"
@@ -242,16 +237,28 @@ export default function App() {
             <Leaderboard theme={theme} user={user} />
           )}
 
+          {activeTab === 'settings' && (
+            <AppSettingsMenu 
+              user={user}
+              onOpenAuthModal={() => setAuthModalOpen(true)}
+              onLogout={handleLogout}
+              theme={theme}
+              setTheme={setTheme}
+              setActiveTab={setActiveTab}
+              streakDays={user ? user.streak : 14}
+            />
+          )}
+
         </main>
       </div>
 
-      {/* 🚀 SLEEK MOBILE WEB BOTTOM NAVIGATION BAR */}
-      <div className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 px-4 py-2 border-t flex items-center justify-around backdrop-blur-lg ${
-        isDark ? 'bg-slate-900/95 border-slate-800 text-white' : 'bg-white/95 border-slate-200 text-slate-950 shadow-lg'
+      {/* 🚀 CLEAN FLOATING MOBILE BOTTOM NAVIGATION BAR */}
+      <div className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 px-3 py-2 border-t flex items-center justify-around backdrop-blur-xl ${
+        isDark ? 'bg-slate-950/95 border-slate-800 text-white' : 'bg-white/95 border-slate-200 text-slate-950 shadow-lg'
       }`}>
         <button
           onClick={() => setActiveTab('dashboard')}
-          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
             activeTab === 'dashboard' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
           }`}
         >
@@ -261,7 +268,7 @@ export default function App() {
 
         <button
           onClick={() => setActiveTab('subjects')}
-          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
             activeTab === 'subjects' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
           }`}
         >
@@ -274,7 +281,7 @@ export default function App() {
             if (!requireAuth()) return;
             setActiveTab('mock-tests');
           }}
-          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
             activeTab === 'mock-tests' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
           }`}
         >
@@ -287,7 +294,7 @@ export default function App() {
             if (!requireAuth()) return;
             setActiveTab('ai-tutor');
           }}
-          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
             activeTab === 'ai-tutor' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
           }`}
         >
@@ -296,16 +303,13 @@ export default function App() {
         </button>
 
         <button
-          onClick={() => {
-            if (!user) setAuthModalOpen(true);
-            else setActiveTab('leaderboard');
-          }}
-          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
-            activeTab === 'leaderboard' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          onClick={() => setActiveTab('settings')}
+          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
+            activeTab === 'settings' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
           }`}
         >
-          {user ? <Trophy className="w-5 h-5" /> : <UserCheck className="w-5 h-5" />}
-          <span>{user ? 'Rank' : 'Sign In'}</span>
+          <Settings className="w-5 h-5" />
+          <span>Menu</span>
         </button>
       </div>
 
