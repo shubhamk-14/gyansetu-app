@@ -49,7 +49,7 @@ export default function Sidebar({ activeTab, setActiveTab, theme, user, onOpenAu
   ];
 
   return (
-    <aside className={`w-full lg:w-64 p-4 flex flex-col justify-between shrink-0 rounded-3xl border transition-colors duration-200 ${
+    <aside className={`hidden lg:flex w-64 p-4 flex-col justify-between shrink-0 rounded-3xl border transition-colors duration-200 ${
       isDark 
         ? 'bg-slate-900 border-slate-800' 
         : 'bg-white border-slate-300 shadow-md'

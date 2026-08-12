@@ -12,6 +12,14 @@ import QuestionBank from './components/QuestionBank';
 import Leaderboard from './components/Leaderboard';
 import AuthModal from './components/AuthModal';
 import { firebaseSignOut } from './services/firebaseService';
+import { 
+  LayoutDashboard, 
+  BookOpen, 
+  Clock, 
+  Bot, 
+  Trophy,
+  UserCheck
+} from 'lucide-react';
 
 export default function App() {
   const [currentExam, setCurrentExam] = useState('ssc');
@@ -131,8 +139,8 @@ export default function App() {
       )}
 
       {/* Main Container */}
-      <div className="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row gap-6 p-4 lg:p-8">
-        {/* Navigation Sidebar */}
+      <div className="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row gap-6 p-4 lg:p-8 pb-20 lg:pb-8">
+        {/* Navigation Sidebar (Desktop) */}
         <Sidebar 
           activeTab={activeTab} 
           setActiveTab={(tab) => {
@@ -235,6 +243,70 @@ export default function App() {
           )}
 
         </main>
+      </div>
+
+      {/* 🚀 SLEEK MOBILE WEB BOTTOM NAVIGATION BAR */}
+      <div className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 px-4 py-2 border-t flex items-center justify-around backdrop-blur-lg ${
+        isDark ? 'bg-slate-900/95 border-slate-800 text-white' : 'bg-white/95 border-slate-200 text-slate-950 shadow-lg'
+      }`}>
+        <button
+          onClick={() => setActiveTab('dashboard')}
+          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+            activeTab === 'dashboard' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          }`}
+        >
+          <LayoutDashboard className="w-5 h-5" />
+          <span>Home</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('subjects')}
+          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+            activeTab === 'subjects' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          }`}
+        >
+          <BookOpen className="w-5 h-5" />
+          <span>Notes</span>
+        </button>
+
+        <button
+          onClick={() => {
+            if (!requireAuth()) return;
+            setActiveTab('mock-tests');
+          }}
+          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+            activeTab === 'mock-tests' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          }`}
+        >
+          <Clock className="w-5 h-5" />
+          <span>Tests</span>
+        </button>
+
+        <button
+          onClick={() => {
+            if (!requireAuth()) return;
+            setActiveTab('ai-tutor');
+          }}
+          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+            activeTab === 'ai-tutor' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          }`}
+        >
+          <Bot className="w-5 h-5" />
+          <span>AI Tutor</span>
+        </button>
+
+        <button
+          onClick={() => {
+            if (!user) setAuthModalOpen(true);
+            else setActiveTab('leaderboard');
+          }}
+          className={`flex flex-col items-center gap-1 text-[11px] font-black ${
+            activeTab === 'leaderboard' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          }`}
+        >
+          {user ? <Trophy className="w-5 h-5" /> : <UserCheck className="w-5 h-5" />}
+          <span>{user ? 'Rank' : 'Sign In'}</span>
+        </button>
       </div>
 
       {/* Login / Register Auth Modal */}
