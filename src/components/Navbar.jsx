@@ -117,7 +117,8 @@ export default function Navbar({
                         <div className={`text-[10px] font-bold ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{exam.date}</div>
                       </div>
 
-                      <span className="text-[10px] font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300 dark:bg-amber-500/20 dark:text-amber-300">
+                      {/* ULTRA-HIGH CONTRAST VIBRANT YELLOW MCQS BADGE */}
+                      <span className="text-[10px] font-black text-slate-950 bg-amber-400 px-2 py-0.5 rounded-md shadow-xs shrink-0">
                         {exam.totalMcqs} MCQs
                       </span>
                     </button>
