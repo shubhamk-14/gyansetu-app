@@ -73,7 +73,7 @@ const PYQS = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('home'); // 'home', 'notes', 'test', 'ai', 'analytics', 'profile'
+  const [activeTab, setActiveTab] = useState('home'); // 'home', 'notes', 'test', 'ai', 'profile'
   const [currentExam, setCurrentExam] = useState(EXAMS[0]);
   
   // Auth State (Logged In by default as Shubham)
@@ -349,7 +349,7 @@ export default function App() {
             {/* SSC CGL QUANT REAL NOTE */}
             <View style={[styles.notesCard, { marginTop: 14 }]}>
               <View style={styles.notesBadgeRow}>
-                <Text style={styles.notesSubject}>SSC CGL / CHSL • Quantitative Aptitude</Text>
+                <Text style={styles.notesSubject}>SSC CGL / CHSL • Quant</Text>
                 <Text style={styles.notesHighYieldTag}>🎯 SSC Quant</Text>
               </View>
               <Text style={styles.notesTitle}>Percentage Fractions & Successive Formula</Text>
@@ -393,7 +393,7 @@ export default function App() {
             {/* BANKING PO REAL NOTE */}
             <View style={[styles.notesCard, { marginTop: 14 }]}>
               <View style={styles.notesBadgeRow}>
-                <Text style={styles.notesSubject}>Banking (IBPS PO / SBI PO) • Monetary Policy</Text>
+                <Text style={styles.notesSubject}>Banking PO • Monetary Policy</Text>
                 <Text style={styles.notesHighYieldTag}>🏦 Banking Awareness</Text>
               </View>
               <Text style={styles.notesTitle}>RBI Monetary Policy Rates & Bank Rate</Text>
@@ -531,39 +531,6 @@ export default function App() {
           </View>
         )}
 
-        {/* 📊 PERFORMANCE ANALYTICS SCREEN */}
-        {activeTab === 'analytics' && (
-          <ScrollView contentContainerStyle={styles.scrollContent}>
-            <Text style={styles.sectionHeader}>Performance & Speed Analytics</Text>
-
-            <View style={styles.metricsGrid}>
-              <View style={styles.metricCard}>
-                <Text style={styles.metricLabel}>Overall Accuracy</Text>
-                <Text style={styles.metricValue}>78.5%</Text>
-                <View style={styles.metricBadge}>
-                  <Text style={styles.metricBadgeText}>Top 5% Tier</Text>
-                </View>
-              </View>
-              <View style={styles.metricCard}>
-                <Text style={styles.metricLabel}>Avg Speed</Text>
-                <Text style={styles.metricValue}>36 sec</Text>
-                <View style={[styles.metricBadge, { backgroundColor: '#e0e7ff' }]}>
-                  <Text style={[styles.metricBadgeText, { color: '#3730a3' }]}>Goal: &lt;40s/MCQ</Text>
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.notesCard}>
-              <Text style={styles.notesSubject}>AI Diagnostic Report</Text>
-              <Text style={styles.notesTitle}>Core Strengths & Vulnerabilities</Text>
-              <Text style={styles.notesBody}>
-                • Strength: Reasoning Ability & Indian Polity (Accuracy &gt;85%).{"\n"}
-                • Vulnerability: Quant Time & Work takes 52s/question. Practice LCM shortcut tricks.
-              </Text>
-            </View>
-          </ScrollView>
-        )}
-
         {/* 👤 PROFILE & LOGIN/LOGOUT SCREEN */}
         {activeTab === 'profile' && (
           <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -640,19 +607,11 @@ export default function App() {
         </TouchableOpacity>
 
         <TouchableOpacity 
-          style={[styles.tabItem, activeTab === 'analytics' && styles.tabItemActive]} 
-          onPress={() => setActiveTab('analytics')}
-        >
-          <Text style={styles.tabIcon}>📊</Text>
-          <Text style={[styles.tabLabel, activeTab === 'analytics' && styles.tabLabelActive]}>Stats</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
           style={[styles.tabItem, activeTab === 'profile' && styles.tabItemActive]} 
           onPress={() => setActiveTab('profile')}
         >
-          <Text style={styles.tabIcon}>👤</Text>
-          <Text style={[styles.tabLabel, activeTab === 'profile' && styles.tabLabelActive]}>Profile</Text>
+          <Text style={styles.tabIcon}>⚙️</Text>
+          <Text style={[styles.tabLabel, activeTab === 'profile' && styles.tabLabelActive]}>Menu</Text>
         </TouchableOpacity>
       </View>
 
@@ -792,11 +751,11 @@ const styles = StyleSheet.create({
   searchNotesBox: { marginBottom: 14 },
   searchNotesInput: { backgroundColor: '#ffffff', borderRadius: 14, paddingHorizontal: 16, paddingVertical: 10, fontSize: 13, color: '#0f172a', borderWidth: 1, borderColor: '#e2e8f0' },
 
-  notesCard: { backgroundColor: '#ffffff', padding: 18, borderRadius: 20, borderWidth: 1, borderColor: '#e2e8f0' },
-  notesBadgeRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  notesSubject: { fontSize: 11, fontWeight: '900', color: '#4f46e5' },
-  notesHighYieldTag: { fontSize: 10, fontWeight: '900', color: '#c2410c', backgroundColor: '#fff7ed', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6 },
-  notesTitle: { fontSize: 17, fontWeight: '900', color: '#0f172a', marginVertical: 6 },
+  notesCard: { backgroundColor: '#ffffff', padding: 16, borderRadius: 20, borderWidth: 1, borderColor: '#e2e8f0' },
+  notesBadgeRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 6 },
+  notesSubject: { fontSize: 11, fontWeight: '900', color: '#4f46e5', flexShrink: 1 },
+  notesHighYieldTag: { fontSize: 10, fontWeight: '900', color: '#c2410c', backgroundColor: '#fff7ed', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, alignSelf: 'flex-start' },
+  notesTitle: { fontSize: 16, fontWeight: '900', color: '#0f172a', marginVertical: 6 },
   notesBody: { fontSize: 13, color: '#334155', lineHeight: 22 },
   
   /* 📐 ULTRA-HIGH CONTRAST QUANT CODE BLOCK */
@@ -865,26 +824,27 @@ const styles = StyleSheet.create({
   /* 🚀 TOP-TIER ED-TECH FLOATING BOTTOM NAVIGATION BAR */
   tabBar: { 
     flexDirection: 'row', 
-    justify: 'space-around', 
+    justifyContent: 'space-around', 
     backgroundColor: '#ffffff', 
-    paddingVertical: 12, 
+    paddingTop: 8,
+    paddingBottom: 22, 
     paddingHorizontal: 8,
     borderTopWidth: 1, 
     borderTopColor: '#e2e8f0'
   },
   tabItem: { 
     alignItems: 'center',
-    justify: 'center',
-    paddingVertical: 6,
+    justifyContent: 'center',
+    paddingVertical: 4,
     paddingHorizontal: 12,
-    borderRadius: 16
+    borderRadius: 14
   },
   tabItemActive: {
     backgroundColor: '#e0e7ff'
   },
   tabIcon: {
-    fontSize: 19,
-    marginBottom: 3
+    fontSize: 18,
+    marginBottom: 2
   },
   tabLabel: { 
     fontSize: 11, 

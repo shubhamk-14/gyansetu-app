@@ -134,7 +134,7 @@ export default function App() {
       )}
 
       {/* Main Container */}
-      <div className="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row gap-6 p-4 lg:p-8 pb-20 lg:pb-8">
+      <div className="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row gap-6 p-4 lg:p-8 pb-28 lg:pb-8">
         {/* Navigation Sidebar (Desktop) */}
         <Sidebar 
           activeTab={activeTab} 
@@ -252,14 +252,17 @@ export default function App() {
         </main>
       </div>
 
-      {/* 🚀 CLEAN FLOATING MOBILE BOTTOM NAVIGATION BAR */}
-      <div className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 px-3 py-2 border-t flex items-center justify-around backdrop-blur-xl ${
-        isDark ? 'bg-slate-950/95 border-slate-800 text-white' : 'bg-white/95 border-slate-200 text-slate-950 shadow-lg'
-      }`}>
+      {/* 🚀 SAFE-AREA OPTIMIZED FLOATING MOBILE BOTTOM NAVIGATION BAR */}
+      <div 
+        className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 px-3 pt-2.5 pb-6 border-t flex items-center justify-around backdrop-blur-xl shadow-2xl ${
+          isDark ? 'bg-slate-950/95 border-slate-800 text-white' : 'bg-white/95 border-slate-200 text-slate-950'
+        }`}
+        style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
+      >
         <button
           onClick={() => setActiveTab('dashboard')}
-          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
-            activeTab === 'dashboard' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          className={`flex flex-col items-center gap-1 text-[10px] font-black transition-all ${
+            activeTab === 'dashboard' ? 'text-indigo-600 dark:text-indigo-400 scale-105' : 'text-slate-500'
           }`}
         >
           <LayoutDashboard className="w-5 h-5" />
@@ -268,8 +271,8 @@ export default function App() {
 
         <button
           onClick={() => setActiveTab('subjects')}
-          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
-            activeTab === 'subjects' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          className={`flex flex-col items-center gap-1 text-[10px] font-black transition-all ${
+            activeTab === 'subjects' ? 'text-indigo-600 dark:text-indigo-400 scale-105' : 'text-slate-500'
           }`}
         >
           <BookOpen className="w-5 h-5" />
@@ -281,8 +284,8 @@ export default function App() {
             if (!requireAuth()) return;
             setActiveTab('mock-tests');
           }}
-          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
-            activeTab === 'mock-tests' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          className={`flex flex-col items-center gap-1 text-[10px] font-black transition-all ${
+            activeTab === 'mock-tests' ? 'text-indigo-600 dark:text-indigo-400 scale-105' : 'text-slate-500'
           }`}
         >
           <Clock className="w-5 h-5" />
@@ -294,8 +297,8 @@ export default function App() {
             if (!requireAuth()) return;
             setActiveTab('ai-tutor');
           }}
-          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
-            activeTab === 'ai-tutor' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          className={`flex flex-col items-center gap-1 text-[10px] font-black transition-all ${
+            activeTab === 'ai-tutor' ? 'text-indigo-600 dark:text-indigo-400 scale-105' : 'text-slate-500'
           }`}
         >
           <Bot className="w-5 h-5" />
@@ -304,8 +307,8 @@ export default function App() {
 
         <button
           onClick={() => setActiveTab('settings')}
-          className={`flex flex-col items-center gap-1 text-[10px] font-black ${
-            activeTab === 'settings' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500'
+          className={`flex flex-col items-center gap-1 text-[10px] font-black transition-all ${
+            activeTab === 'settings' ? 'text-indigo-600 dark:text-indigo-400 scale-105' : 'text-slate-500'
           }`}
         >
           <Settings className="w-5 h-5" />

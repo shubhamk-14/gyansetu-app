@@ -70,7 +70,7 @@ export default function SubjectsNotes({
   };
 
   return (
-    <div className="space-y-6 pb-8 animate-fadeIn">
+    <div className="space-y-6 pb-8 animate-fadeIn max-w-full overflow-hidden">
       
       {/* Student-Friendly Header Banner */}
       <div className={`p-6 sm:p-8 rounded-3xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl ${
@@ -186,10 +186,12 @@ export default function SubjectsNotes({
                     </div>
                   </div>
 
-                  <div className={`flex items-center justify-between text-[10px] font-black ${isDark ? 'text-slate-400' : 'text-slate-700'}`}>
-                    <span className="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-200 border border-slate-300 dark:border-slate-700">{topic.level}</span>
-                    <span>⏱️ {topic.estimatedTime}</span>
-                    <span className="text-indigo-900 dark:text-indigo-300 font-black bg-indigo-100 dark:bg-indigo-950 px-2 py-0.5 rounded border border-indigo-300 dark:border-indigo-800">
+                  <div className="flex items-center justify-between text-[10px] font-black">
+                    <span className="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-950 dark:text-slate-100 border border-slate-300 dark:border-slate-700">{topic.level}</span>
+                    <span className="text-slate-950 dark:text-slate-100">⏱️ {topic.estimatedTime}</span>
+                    
+                    {/* HIGH CONTRAST MASTERY BADGE */}
+                    <span className="text-slate-950 font-black bg-amber-300 px-2 py-0.5 rounded border border-amber-400">
                       Mastery: {topic.mastery}%
                     </span>
                   </div>
@@ -299,14 +301,14 @@ export default function SubjectsNotes({
                 </div>
               )}
 
-              {/* Memory Trick Callout */}
+              {/* 5-SECOND SPEED TRICK - ULTRA-HIGH CONTRAST PITCH BLACK TEXT */}
               {activeTopic.notes.shortcutTricks && (
-                <div className="p-4 sm:p-5 rounded-2xl bg-amber-100 border border-amber-300 text-amber-950 dark:bg-amber-500/10 dark:border-amber-500/30 space-y-1.5">
-                  <div className="flex items-center gap-2 text-amber-900 dark:text-amber-400 font-black text-xs">
-                    <Lightbulb className="w-4 h-4 text-amber-600" />
-                    <span>5-Second Speed Trick / Memory Mnemonic</span>
+                <div className="p-5 rounded-2xl bg-amber-300 border-2 border-amber-400 text-slate-950 shadow-md space-y-2">
+                  <div className="flex items-center gap-2 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider">
+                    <Lightbulb className="w-5 h-5 text-amber-900 fill-amber-900" />
+                    <span>⚡ 5-Second Speed Trick / Memory Shortcut</span>
                   </div>
-                  <p className="text-xs text-amber-950 dark:text-amber-200 leading-relaxed font-black">
+                  <p className="text-xs sm:text-sm text-slate-950 leading-relaxed font-black">
                     {activeTopic.notes.shortcutTricks}
                   </p>
                 </div>
