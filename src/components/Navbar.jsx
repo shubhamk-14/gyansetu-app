@@ -24,7 +24,7 @@ export default function Navbar({
         ? 'bg-slate-950/90 border-slate-800' 
         : 'bg-white/95 border-slate-200 shadow-sm'
     }`}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-hidden">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         
         {/* Brand Logo - GyanSetu */}
         <div className="flex items-center gap-2.5 cursor-pointer shrink-0" onClick={() => setActiveTab('dashboard')}>
@@ -52,7 +52,7 @@ export default function Navbar({
           </div>
         </div>
 
-        {/* Target Exam Goal Selector */}
+        {/* Target Exam Goal Selector Dropdown */}
         <div className="relative shrink min-w-0">
           <button
             onClick={() => setExamDropdownOpen(!examDropdownOpen)}
@@ -76,7 +76,7 @@ export default function Navbar({
             </div>
           </button>
 
-          {/* Exam Dropdown */}
+          {/* Exam Dropdown Menu */}
           {examDropdownOpen && (
             <div 
               className={`absolute top-full right-0 mt-2 w-64 sm:w-72 border rounded-2xl shadow-2xl p-2 z-50 animate-fadeIn backdrop-blur-xl ${
